@@ -101,8 +101,15 @@ function ief_popup_inline_entity_form_entity_form_alter(&$ief_form, &$form_state
   }
 
   if ($is_complex_widget == TRUE) {
-    /* add ief-popup-wrapper and ui-dialog to IEF */
-    _process_ief_form($ief_form, $ief_form["#op"]);
+    if ($ief_form["#entity_type"] != "commerce_product_variation") {
+    
+      /* add ief-popup-wrapper and ui-dialog to IEF */
+      _process_ief_form($ief_form, $ief_form["#op"]);
+
+    } else if ($_POST["_triggering_element_value"] != "Add new product" && 
+                $_POST["_triggering_element_value"] != "Add new Add on") {
+      _process_ief_form($ief_form, $ief_form["#op"]);
+    }
   }
 }
 
